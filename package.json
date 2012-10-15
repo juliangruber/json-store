@@ -1,0 +1,20 @@
+{
+  "name": "json-store",
+  "version": "0.0.1",
+  "description": "Simple json db for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/juliangruber/json-store.git"
+  },
+  "keywords": [
+    "js",
+    "db",
+    "blocking"
+  ],
+  "author": "Julian Gruber <julian@juliangruber.com>",
+  "license": "MIT"
+}
