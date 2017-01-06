@@ -8,7 +8,6 @@ function Store(path) {
 
 Store.prototype.get = function(key) {
   if (!key) return clone(this.Store);
-  if (!this.Store[key]) return;
   return clone(this.Store[key]);
 }
 
@@ -27,6 +26,8 @@ Store.prototype.save = function() {
 }
 
 function clone(data) {
+  // JSON.parse(undefined) throws an error, so handle it explicitly
+  if (data === undefined) return undefined;
   return JSON.parse(JSON.stringify(data));
 }
 
