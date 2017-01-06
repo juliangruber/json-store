@@ -7,7 +7,7 @@ function Store(path) {
 }
 
 Store.prototype.get = function(key) {
-  if (!key) return clone(this.Store);
+  if (key == null) return clone(this.Store);
   return clone(this.Store[key]);
 }
 
