@@ -12,7 +12,7 @@ export default class Store {
       this.Store = JSON.parse(fs.readFileSync(path, 'utf8'))
     } else {
       this._store = {}
-      this.save()
+      this._save()
     }
   }
 
@@ -22,15 +22,15 @@ export default class Store {
 
   set (key, value) {
     this._store[key] = clone(value)
-    this.save()
+    this._save()
   }
 
   del (key) {
     delete this._store[key]
-    this.save()
+    this._save()
   }
 
-  save () {
+  _save () {
     fs.writeFileSync(this._path, JSON.stringify(this._store))
   }
 }
