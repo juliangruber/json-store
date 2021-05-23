@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Simple json db for node",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "node test.js"
+    "test": "prettier-standard && standard && node test.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,9 @@
     "blocking"
   ],
   "author": "Julian Gruber <julian@juliangruber.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier-standard": "^16.4.1",
+    "standard": "^16.0.3"
+  }
 }

@@ -1,30 +1,30 @@
-var JSONStore = require('./index');
-var assert = require('assert');
-var db = JSONStore(__dirname+'/test.json');
+import assert from 'assert'
+import { join, dirname } from 'path'
+import fs from 'fs'
+import { fileURLToPath } from 'url'
+import JSONStore from './index.js'
 
-process.on('uncaughtException', function(err) {
-  require('fs').unlinkSync(__dirname+'/test.json');
-  throw err;
-});
+const file = join(dirname(fileURLToPath(import.meta.url)), 'test.json')
 
-// return undefined
-assert(typeof db.get('foo') == 'undefined');
+const db = new JSONStore(file)
+
+process.on('exit', () => fs.unlinkSync(file))
+
+assert.strictEqual(typeof db.get('foo'), 'undefined')
 
 // can store values
-db.set('foo', 'bar');
-assert(db.get('foo') == 'bar');
+db.set('foo', 'bar')
+assert.strictEqual(db.get('foo'), 'bar')
 
 // serializes objects on set
-var obj = {foo: 'bar'};
-db.set('obj', obj);
-obj.foo = 'changed';
-assert(db.get('obj').foo == 'bar');
+let obj = { foo: 'bar' }
+db.set('obj', obj)
+obj.foo = 'changed'
+assert.strictEqual(db.get('obj').foo, 'bar')
 
 // serializes objects on get
-var obj = db.get('obj');
-obj.foo = 'changed';
-assert(db.get('obj').foo == 'bar');
+obj = db.get('obj')
+obj.foo = 'changed'
+assert.strictEqual(db.get('obj').foo, 'bar')
 
-console.log('All tests passed');
-
-require('fs').unlinkSync(__dirname+'/test.json');
+console.log('All tests passed')
