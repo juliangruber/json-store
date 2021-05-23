@@ -7,30 +7,30 @@ const clone = data => {
 
 export default class Store {
   constructor (path) {
-    this.path = path
+    this._path = path
     if (fs.existsSync(path)) {
       this.Store = JSON.parse(fs.readFileSync(path, 'utf8'))
     } else {
-      this.Store = {}
+      this._store = {}
       this.save()
     }
   }
 
   get (key) {
-    return clone(key ? this.Store[key] : this.Store)
+    return clone(key ? this._store[key] : this._store)
   }
 
   set (key, value) {
-    this.Store[key] = clone(value)
+    this._store[key] = clone(value)
     this.save()
   }
 
   del (key) {
-    delete this.Store[key]
+    delete this._store[key]
     this.save()
   }
 
   save () {
-    fs.writeFileSync(this.path, JSON.stringify(this.Store))
+    fs.writeFileSync(this._path, JSON.stringify(this._store))
   }
 }
